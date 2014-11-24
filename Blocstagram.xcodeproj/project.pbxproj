@@ -9,10 +9,7 @@
 /* Begin PBXBuildFile section */
 		F9A4D2D01A23EB9A003456C0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A4D2CF1A23EB9A003456C0 /* main.m */; };
 		F9A4D2D31A23EB9A003456C0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A4D2D21A23EB9A003456C0 /* AppDelegate.m */; };
-		F9A4D2D61A23EB9A003456C0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A4D2D51A23EB9A003456C0 /* ViewController.m */; };
-		F9A4D2D91A23EB9A003456C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9A4D2D71A23EB9A003456C0 /* Main.storyboard */; };
 		F9A4D2DB1A23EB9A003456C0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9A4D2DA1A23EB9A003456C0 /* Images.xcassets */; };
-		F9A4D2DE1A23EB9A003456C0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9A4D2DC1A23EB9A003456C0 /* LaunchScreen.xib */; };
 		F9A4D2EA1A23EB9A003456C0 /* BlocstagramTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A4D2E91A23EB9A003456C0 /* BlocstagramTests.m */; };
 /* End PBXBuildFile section */
 
@@ -32,11 +29,7 @@
 		F9A4D2CF1A23EB9A003456C0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F9A4D2D11A23EB9A003456C0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F9A4D2D21A23EB9A003456C0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		F9A4D2D41A23EB9A003456C0 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		F9A4D2D51A23EB9A003456C0 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		F9A4D2D81A23EB9A003456C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F9A4D2DA1A23EB9A003456C0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		F9A4D2DD1A23EB9A003456C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		F9A4D2E31A23EB9A003456C0 /* BlocstagramTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlocstagramTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9A4D2E81A23EB9A003456C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F9A4D2E91A23EB9A003456C0 /* BlocstagramTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlocstagramTests.m; sourceTree = "<group>"; };
@@ -83,11 +76,7 @@
 			children = (
 				F9A4D2D11A23EB9A003456C0 /* AppDelegate.h */,
 				F9A4D2D21A23EB9A003456C0 /* AppDelegate.m */,
-				F9A4D2D41A23EB9A003456C0 /* ViewController.h */,
-				F9A4D2D51A23EB9A003456C0 /* ViewController.m */,
-				F9A4D2D71A23EB9A003456C0 /* Main.storyboard */,
 				F9A4D2DA1A23EB9A003456C0 /* Images.xcassets */,
-				F9A4D2DC1A23EB9A003456C0 /* LaunchScreen.xib */,
 				F9A4D2CD1A23EB9A003456C0 /* Supporting Files */,
 			);
 			path = Blocstagram;
@@ -199,8 +188,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9A4D2D91A23EB9A003456C0 /* Main.storyboard in Resources */,
-				F9A4D2DE1A23EB9A003456C0 /* LaunchScreen.xib in Resources */,
 				F9A4D2DB1A23EB9A003456C0 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -219,7 +206,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9A4D2D61A23EB9A003456C0 /* ViewController.m in Sources */,
 				F9A4D2D31A23EB9A003456C0 /* AppDelegate.m in Sources */,
 				F9A4D2D01A23EB9A003456C0 /* main.m in Sources */,
 			);
@@ -242,25 +228,6 @@
 			targetProxy = F9A4D2E41A23EB9A003456C0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		F9A4D2D71A23EB9A003456C0 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F9A4D2D81A23EB9A003456C0 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		F9A4D2DC1A23EB9A003456C0 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F9A4D2DD1A23EB9A003456C0 /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		F9A4D2EB1A23EB9A003456C0 /* Debug */ = {
