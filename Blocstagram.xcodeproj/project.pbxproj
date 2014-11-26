@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F904C50B1A253A6600819B3E /* MediaTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F904C50A1A253A6600819B3E /* MediaTableViewCell.m */; };
 		F977C8AB1A25033400E9E155 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = F977C8AA1A25033400E9E155 /* User.m */; };
 		F977C8AE1A25045100E9E155 /* Media.m in Sources */ = {isa = PBXBuildFile; fileRef = F977C8AD1A25045100E9E155 /* Media.m */; };
 		F977C8B11A25056700E9E155 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = F977C8B01A25056700E9E155 /* Comment.m */; };
@@ -39,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F904C5091A253A6600819B3E /* MediaTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MediaTableViewCell.h; path = ../MediaTableViewCell.h; sourceTree = "<group>"; };
+		F904C50A1A253A6600819B3E /* MediaTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MediaTableViewCell.m; path = ../MediaTableViewCell.m; sourceTree = "<group>"; };
 		F977C8A91A25033400E9E155 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = ../User.h; sourceTree = "<group>"; };
 		F977C8AA1A25033400E9E155 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = ../User.m; sourceTree = "<group>"; };
 		F977C8AC1A25045100E9E155 /* Media.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Media.h; path = ../Media.h; sourceTree = "<group>"; };
@@ -112,6 +115,8 @@
 				F9A4D2F31A23EEBE003456C0 /* Images */,
 				F9A4D2D11A23EB9A003456C0 /* AppDelegate.h */,
 				F9A4D2D21A23EB9A003456C0 /* AppDelegate.m */,
+				F904C5091A253A6600819B3E /* MediaTableViewCell.h */,
+				F904C50A1A253A6600819B3E /* MediaTableViewCell.m */,
 				F977C8B21A25066300E9E155 /* DataSource.h */,
 				F977C8B31A25066300E9E155 /* DataSource.m */,
 				F977C8AF1A25056700E9E155 /* Comment.h */,
@@ -281,6 +286,7 @@
 			files = (
 				F977C8AB1A25033400E9E155 /* User.m in Sources */,
 				F977C8B11A25056700E9E155 /* Comment.m in Sources */,
+				F904C50B1A253A6600819B3E /* MediaTableViewCell.m in Sources */,
 				F977C8AE1A25045100E9E155 /* Media.m in Sources */,
 				F9A4D30A1A23EF81003456C0 /* ImagesTableViewController.m in Sources */,
 				F977C8B41A25066300E9E155 /* DataSource.m in Sources */,
