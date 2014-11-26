@@ -128,15 +128,7 @@ static NSParagraphStyle *paragraphStyle;
     
     paragraphStyle = mutableParagraphStyle;
 }
-/*
-- (CGSize) sizeOfString:(NSAttributedString *)string {
-    CGSize maxSize = CGSizeMake(CGRectGetWidth(self.contentView.bounds) - 20, 0.0);
-    CGRect sizeRect = [string boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin context:nil];
-    sizeRect.size.height+= 20;
-    sizeRect = CGRectIntegral(sizeRect);
-    return sizeRect.size;
-}
-*/
+
 - (NSAttributedString *) usernameAndCaptionString {
     CGFloat usernameFontSize = 15;
     
