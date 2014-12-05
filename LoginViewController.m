@@ -33,7 +33,7 @@
     self.title = @"Login";
     
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
-                                   initWithTitle:@"Home"
+                                   initWithTitle:@""
                                    style:UIBarButtonItemStylePlain
                                    target:self
                                    action:@selector(BackButtonPressed:)];
@@ -96,10 +96,24 @@ NSString *const LoginViewControllerDidGetAccessTokenNotification = @"LoginViewCo
 
 #pragma mark - Navigation
 
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+    if (self.webView.canGoBack) {
+        self.navigationItem.hidesBackButton = NO;
+        [self.navigationItem.leftBarButtonItem setEnabled:YES];
+    }
+    else {
+        [self.navigationItem.leftBarButtonItem setEnabled:NO];
+        self.navigationItem.hidesBackButton = YES;
+    }
+}
+
 - (void)BackButtonPressed:(id)sender
 {
-    LoginViewController *homeVC = [[LoginViewController alloc] init];
-    [self.navigationController pushViewController:homeVC animated:YES];
+    if (self.webView.canGoBack) {
+        [self.webView goBack];
+    }
+    //LoginViewController *homeVC = [[LoginViewController alloc] init];
+    //[self.navigationController pushViewController:homeVC animated:YES];
 }
 
 /*
