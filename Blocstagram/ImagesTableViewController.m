@@ -218,12 +218,12 @@
 #pragma mark - MediaTableViewCellDelegate
 
 - (void) cell:(MediaTableViewCell *)cell didTapImageView:(UIImageView *)imageView {
-    //self.lastTappedImageView = imageView;
+    self.lastTappedImageView = imageView;
     
     MediaFullScreenViewController *fullScreenVC = [[MediaFullScreenViewController alloc] initWithMedia:cell.mediaItem];
     
-    //fullScreenVC.transitioningDelegate = self;
-    //fullScreenVC.modalPresentationStyle = UIModalPresentationCustom;
+    fullScreenVC.transitioningDelegate = self;
+    fullScreenVC.modalPresentationStyle = UIModalPresentationCustom;
     
     [self presentViewController:fullScreenVC animated:YES completion:nil];
 }
@@ -246,7 +246,7 @@
 }
 
 #pragma mark - UIViewControllerTransitioningDelegate
-/*
+
  - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
  presentingController:(UIViewController *)presenting
  sourceController:(UIViewController *)source {
@@ -264,6 +264,6 @@
  
  return animator;
  }
-*/
+
 
 @end

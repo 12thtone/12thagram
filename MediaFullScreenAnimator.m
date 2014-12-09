@@ -68,6 +68,9 @@
             toViewController.view.tintAdjustmentMode = UIViewTintAdjustmentModeAutomatic;
         } completion:^(BOOL finished) {
             [transitionContext completeTransition:YES];
+            if(![[UIApplication sharedApplication].keyWindow.subviews containsObject:toViewController.view]) {
+                [[UIApplication sharedApplication].keyWindow addSubview:toViewController.view];
+            }
         }];
     }
 }
