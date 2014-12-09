@@ -45,6 +45,7 @@
         if (!self.accessToken) {
             [self registerForAccessTokenNotification];
         } else {
+            //[self populateDataWithParameters:nil completionHandler:nil];
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 NSString *fullPath = [self pathForFilename:NSStringFromSelector(@selector(mediaItems))];
                 NSArray *storedMediaItems = [NSKeyedUnarchiver unarchiveObjectWithFile:fullPath];
@@ -62,9 +63,15 @@
                 });
             });
         }
+        
+        NSLog(@"It wrote to disk.");
     }
     
     return self;
+}
+
++ (NSString *) instagramClientID {
+    return @"b113dd408a384216a9c991e14ddcde18";
 }
 
 - (void) registerForAccessTokenNotification {
@@ -75,6 +82,15 @@
         // Got a token, populate the initial data
         [self populateDataWithParameters:nil completionHandler:nil];
     }];
+}
+
+#pragma mark - Saving
+
+- (NSString *) pathForFilename:(NSString *) filename {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths firstObject];
+    NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:filename];
+    return dataPath;
 }
 
 #pragma mark - Key/Value Observing
@@ -116,7 +132,7 @@
         self.isRefreshing = YES;
         
         NSString *minID = [[self.mediaItems firstObject] idNumber];
-        //NSDictionary *parameters = @{@"min_id": minID};
+        //NSDictionary *parameters = @{@"min_id": minID};        
         NSDictionary *parameters = nil;
         if (minID != nil) {
             parameters = @{@"min_id": minID};
@@ -149,12 +165,6 @@
             }
         }];
     }
-}
-
-#pragma mark - Instagram 
-
-+ (NSString *) instagramClientID {
-    return @"b113dd408a384216a9c991e14ddcde18";
 }
 
 - (void) populateDataWithParameters:(NSDictionary *)parameters completionHandler:(NewItemCompletionBlock)completionHandler {
@@ -265,6 +275,8 @@
     }
 }
 
+#pragma mark - Download
+
 - (void) downloadImageForMediaItem:(Media *)mediaItem {
     if (mediaItem.mediaURL && !mediaItem.image) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -291,15 +303,6 @@
             }
         });
     }
-}
-
-#pragma mark - Saving
-
-- (NSString *) pathForFilename:(NSString *) filename {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths firstObject];
-    NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:filename];
-    return dataPath;
 }
 
 @end
