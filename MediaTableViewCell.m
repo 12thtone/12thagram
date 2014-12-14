@@ -171,13 +171,13 @@ static NSParagraphStyle *paragraphStyle;
 
 - (void) setMediaItem:(Media *)mediaItem {
     _mediaItem = mediaItem;
-    //self.mediaImageView.image = _mediaItem.image;
-    
+    self.mediaImageView.image = _mediaItem.image;
+    /*
     if (!_mediaItem.image) {
         self.mediaImageView.image = [UIImage imageNamed:@"placeholder.jpg"];
     } else {
         self.mediaImageView.image = _mediaItem.image;
-    }
+    }*/
     
     self.usernameAndCaptionLabel.attributedText = [self usernameAndCaptionString];
     self.commentLabel.attributedText = [self commentString];

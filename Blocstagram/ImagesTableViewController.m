@@ -163,13 +163,20 @@
     NSArray *arrayItems = [DataSource sharedInstance].mediaItems;
     for (int i = 0; i < arrayItems.count; i++) {
         Media *mediaItem = [DataSource sharedInstance].mediaItems[i];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(void) {
+        //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(void) {
             if (mediaItem.downloadState == MediaDownloadStateNeedsImage) {
                 [[DataSource sharedInstance] downloadImageForMediaItem:mediaItem];
             }
-        });
+        //});
     }
 }
+/*
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    Media *mediaItem = [DataSource sharedInstance].mediaItems[indexPath.row];
+    if (mediaItem.downloadState == MediaDownloadStateNeedsImage) {
+        [[DataSource sharedInstance] downloadImageForMediaItem:mediaItem];
+    }
+}*/
 
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
