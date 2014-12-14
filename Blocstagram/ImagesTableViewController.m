@@ -16,9 +16,9 @@
 #import "MediaFullScreenAnimator.h"
 
 @interface ImagesTableViewController () <MediaTableViewCellDelegate, UIViewControllerTransitioningDelegate>
-//@interface ImagesTableViewController () <MediaTableViewCellDelegate>
 
 @property (nonatomic, weak) UIImageView *lastTappedImageView;
+@property(nonatomic, readonly, getter=isDragging) BOOL dragging;
 
 @end
 
@@ -27,9 +27,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[DataSource sharedInstance] requestNewItemsWithCompletionHandler:^(NSError *error) {
+    //[[DataSource sharedInstance] requestNewItemsWithCompletionHandler:^(NSError *error) {
         
-    }];
+    //}];
     
     NSLog(@"Work!!");
         
@@ -82,9 +82,45 @@
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [self infiniteScrollIfNecessary];
-    NSLog(@"It's calling!");
+    //[self.tableView reloadData];
 }
-
+/*
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    NSArray *arrayItems = [DataSource sharedInstance].mediaItems;
+    for (int i = 0; i < arrayItems.count; i++) {
+        Media *mediaItem = [DataSource sharedInstance].mediaItems[i];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(void) {
+            if (mediaItem.downloadState == MediaDownloadStateNeedsImage) {
+                [[DataSource sharedInstance] downloadImageForMediaItem:mediaItem];
+            }
+        });
+    }
+}*/
+/*
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
+    NSArray *arrayItems = [DataSource sharedInstance].mediaItems;
+    for (int i = 0; i < arrayItems.count; i++) {
+        Media *mediaItem = [DataSource sharedInstance].mediaItems[i];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(void) {
+            if (mediaItem.downloadState == MediaDownloadStateNeedsImage) {
+                [[DataSource sharedInstance] downloadImageForMediaItem:mediaItem];
+            }
+        });
+    }
+    //[self.tableView reloadData];
+}*/
+/*
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
+    NSArray *arrayItems = [DataSource sharedInstance].mediaItems;
+    for (int i = 0; i < arrayItems.count; i++) {
+        Media *mediaItem = [DataSource sharedInstance].mediaItems[i];
+        if (mediaItem.downloadState == MediaDownloadStateNeedsImage) {
+                [[DataSource sharedInstance] downloadImageForMediaItem:mediaItem];
+        }
+    }
+    //[self.tableView reloadData];
+}
+ */
 #pragma mark - Table view data source
 
 - (NSMutableArray *)items {
@@ -115,6 +151,7 @@
 
 - (CGFloat) tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
     Media *item = [DataSource sharedInstance].mediaItems[indexPath.row];
+    
     if (item.image) {
         return 350;
     } else {
@@ -122,14 +159,25 @@
     }
 }
 
-/*
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSArray *arrayItems = [DataSource sharedInstance].mediaItems;
+    for (int i = 0; i < arrayItems.count; i++) {
+        Media *mediaItem = [DataSource sharedInstance].mediaItems[i];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(void) {
+            if (mediaItem.downloadState == MediaDownloadStateNeedsImage) {
+                [[DataSource sharedInstance] downloadImageForMediaItem:mediaItem];
+            }
+        });
+    }
+}
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
    
     return YES;
 }
- */
+
 /*
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
     [super setEditing:editing animated:animated];

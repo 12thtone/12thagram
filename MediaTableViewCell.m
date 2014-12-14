@@ -68,7 +68,7 @@ static NSParagraphStyle *paragraphStyle;
             [self.contentView addSubview:view];
             view.translatesAutoresizingMaskIntoConstraints = NO;
         }
-        
+            
         NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_mediaImageView, _usernameAndCaptionLabel, _commentLabel);
         
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_mediaImageView]|" options:kNilOptions metrics:nil views:viewDictionary]];
@@ -86,8 +86,7 @@ static NSParagraphStyle *paragraphStyle;
                                                                      toItem:nil
                                                                   attribute:NSLayoutAttributeNotAnAttribute
                                                                  multiplier:1
-                                                                   constant:100];
-        
+                                                                   constant:CGRectGetWidth(self.contentView.bounds)];
         
         self.usernameAndCaptionLabelHeightConstraint = [NSLayoutConstraint constraintWithItem:_usernameAndCaptionLabel
                                                                                     attribute:NSLayoutAttributeHeight
@@ -107,6 +106,7 @@ static NSParagraphStyle *paragraphStyle;
         
         [self.contentView addConstraints:@[self.imageHeightConstraint, self.usernameAndCaptionLabelHeightConstraint, self.commentLabelHeightConstraint]];
     }
+    
     return self;
 }
 
@@ -152,12 +152,7 @@ static NSParagraphStyle *paragraphStyle;
     
     self.usernameAndCaptionLabelHeightConstraint.constant = usernameLabelSize.height + 20;
     self.commentLabelHeightConstraint.constant = commentLabelSize.height + 20;
-    
-    if (_mediaItem.image) {
-        self.imageHeightConstraint.constant = self.mediaItem.image.size.height / self.mediaItem.image.size.width * CGRectGetWidth(self.contentView.bounds);
-    } else {
-        self.imageHeightConstraint.constant = 0;
-    }
+    self.imageHeightConstraint.constant = CGRectGetWidth(self.contentView.bounds);
     
     // Hide the line between cells
     self.separatorInset = UIEdgeInsetsMake(0, 0, 0, CGRectGetWidth(self.bounds));
@@ -176,7 +171,14 @@ static NSParagraphStyle *paragraphStyle;
 
 - (void) setMediaItem:(Media *)mediaItem {
     _mediaItem = mediaItem;
-    self.mediaImageView.image = _mediaItem.image;
+    //self.mediaImageView.image = _mediaItem.image;
+    
+    if (!_mediaItem.image) {
+        self.mediaImageView.image = [UIImage imageNamed:@"placeholder.jpg"];
+    } else {
+        self.mediaImageView.image = _mediaItem.image;
+    }
+    
     self.usernameAndCaptionLabel.attributedText = [self usernameAndCaptionString];
     self.commentLabel.attributedText = [self commentString];
 }

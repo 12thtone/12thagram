@@ -29,6 +29,7 @@
 		F9A4D3061A23EEF5003456C0 /* 9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F9A4D2FC1A23EEF5003456C0 /* 9.jpg */; };
 		F9A4D3071A23EEF5003456C0 /* 10.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F9A4D2FD1A23EEF5003456C0 /* 10.jpg */; };
 		F9A4D30A1A23EF81003456C0 /* ImagesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A4D3091A23EF81003456C0 /* ImagesTableViewController.m */; };
+		F9CCC3001A3E14400045E6F7 /* placeholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F9CCC2FF1A3E14400045E6F7 /* placeholder.jpg */; };
 		F9E26A5F1A33A2CB00288519 /* MediaFullScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E26A5E1A33A2CB00288519 /* MediaFullScreenViewController.m */; };
 		F9E26A621A33A7F100288519 /* MediaFullScreenAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E26A611A33A7F100288519 /* MediaFullScreenAnimator.m */; };
 /* End PBXBuildFile section */
@@ -79,6 +80,7 @@
 		F9A4D2FD1A23EEF5003456C0 /* 10.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 10.jpg; sourceTree = "<group>"; };
 		F9A4D3081A23EF81003456C0 /* ImagesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagesTableViewController.h; sourceTree = "<group>"; };
 		F9A4D3091A23EF81003456C0 /* ImagesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagesTableViewController.m; sourceTree = "<group>"; };
+		F9CCC2FF1A3E14400045E6F7 /* placeholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = placeholder.jpg; sourceTree = "<group>"; };
 		F9E26A5D1A33A2CB00288519 /* MediaFullScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MediaFullScreenViewController.h; path = ../MediaFullScreenViewController.h; sourceTree = "<group>"; };
 		F9E26A5E1A33A2CB00288519 /* MediaFullScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MediaFullScreenViewController.m; path = ../MediaFullScreenViewController.m; sourceTree = "<group>"; };
 		F9E26A601A33A7F100288519 /* MediaFullScreenAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MediaFullScreenAnimator.h; path = ../MediaFullScreenAnimator.h; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 		F9A4D2F31A23EEBE003456C0 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				F9CCC2FF1A3E14400045E6F7 /* placeholder.jpg */,
 				F9A4D2F41A23EEF5003456C0 /* 1.jpg */,
 				F9A4D2F51A23EEF5003456C0 /* 2.jpg */,
 				F9A4D2F61A23EEF5003456C0 /* 3.jpg */,
@@ -298,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9A4D3031A23EEF5003456C0 /* 6.jpg in Resources */,
+				F9CCC3001A3E14400045E6F7 /* placeholder.jpg in Resources */,
 				F9A4D2FF1A23EEF5003456C0 /* 2.jpg in Resources */,
 				F9A4D2DB1A23EB9A003456C0 /* Images.xcassets in Resources */,
 				F9A4D3071A23EEF5003456C0 /* 10.jpg in Resources */,
