@@ -27,12 +27,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //[[DataSource sharedInstance] requestNewItemsWithCompletionHandler:^(NSError *error) {
-        
-    //}];
-    
-    NSLog(@"Work!!");
-        
     [[DataSource sharedInstance] addObserver:self forKeyPath:@"mediaItems" options:0 context:nil];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
@@ -78,49 +72,17 @@
     }
 }
 
+- (void) cellDidPressLikeButton:(MediaTableViewCell *)cell {
+    [[DataSource sharedInstance] toggleLikeOnMediaItem:cell.mediaItem];
+}
+
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [self infiniteScrollIfNecessary];
     //[self.tableView reloadData];
 }
-/*
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    NSArray *arrayItems = [DataSource sharedInstance].mediaItems;
-    for (int i = 0; i < arrayItems.count; i++) {
-        Media *mediaItem = [DataSource sharedInstance].mediaItems[i];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(void) {
-            if (mediaItem.downloadState == MediaDownloadStateNeedsImage) {
-                [[DataSource sharedInstance] downloadImageForMediaItem:mediaItem];
-            }
-        });
-    }
-}*/
-/*
-- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
-    NSArray *arrayItems = [DataSource sharedInstance].mediaItems;
-    for (int i = 0; i < arrayItems.count; i++) {
-        Media *mediaItem = [DataSource sharedInstance].mediaItems[i];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(void) {
-            if (mediaItem.downloadState == MediaDownloadStateNeedsImage) {
-                [[DataSource sharedInstance] downloadImageForMediaItem:mediaItem];
-            }
-        });
-    }
-    //[self.tableView reloadData];
-}*/
-/*
-- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
-    NSArray *arrayItems = [DataSource sharedInstance].mediaItems;
-    for (int i = 0; i < arrayItems.count; i++) {
-        Media *mediaItem = [DataSource sharedInstance].mediaItems[i];
-        if (mediaItem.downloadState == MediaDownloadStateNeedsImage) {
-                [[DataSource sharedInstance] downloadImageForMediaItem:mediaItem];
-        }
-    }
-    //[self.tableView reloadData];
-}
- */
+
 #pragma mark - Table view data source
 
 - (NSMutableArray *)items {

@@ -11,12 +11,14 @@
 #import "Comment.h"
 #import "User.h"
 #import "DataSource.h"
+#import "LikeButton.h"
 
 @interface MediaTableViewCell () <UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UIImageView *mediaImageView;
 @property (nonatomic, strong) UILabel *usernameAndCaptionLabel;
 @property (nonatomic, strong) UILabel *commentLabel;
+@property (nonatomic, strong) UILabel *totalLikesLabel;
 
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 @property (nonatomic, strong) UILongPressGestureRecognizer *longPressGestureRecognizer;
@@ -26,6 +28,8 @@
 @property (nonatomic, strong) NSLayoutConstraint *imageHeightConstraint;
 @property (nonatomic, strong) NSLayoutConstraint *usernameAndCaptionLabelHeightConstraint;
 @property (nonatomic, strong) NSLayoutConstraint *commentLabelHeightConstraint;
+
+@property (nonatomic, strong) LikeButton *likeButton;
 
 @end
 
@@ -61,18 +65,29 @@ static NSParagraphStyle *paragraphStyle;
         
         self.usernameAndCaptionLabel = [[UILabel alloc] init];
         self.usernameAndCaptionLabel.numberOfLines = 0;
+        self.usernameAndCaptionLabel.backgroundColor = usernameLabelGray;
+        
         self.commentLabel = [[UILabel alloc] init];
         self.commentLabel.numberOfLines = 0;
+        self.commentLabel.backgroundColor = commentLabelGray;
         
-        for (UIView *view in @[self.mediaImageView, self.usernameAndCaptionLabel, self.commentLabel]) {
+        self.totalLikesLabel = [[UILabel alloc] init];
+        self.totalLikesLabel.numberOfLines = 0;
+        self.totalLikesLabel.backgroundColor = usernameLabelGray;
+        self.totalLikesLabel.textAlignment = NSTextAlignmentRight;
+        
+        self.likeButton = [[LikeButton alloc] init];
+        [self.likeButton addTarget:self action:@selector(likePressed:) forControlEvents:UIControlEventTouchUpInside];
+        self.likeButton.backgroundColor = usernameLabelGray;
+        
+        for (UIView *view in @[self.mediaImageView, self.usernameAndCaptionLabel, self.commentLabel, self.totalLikesLabel, self.likeButton]) {
             [self.contentView addSubview:view];
             view.translatesAutoresizingMaskIntoConstraints = NO;
         }
             
-        NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_mediaImageView, _usernameAndCaptionLabel, _commentLabel);
-        
+        NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_mediaImageView, _usernameAndCaptionLabel, _commentLabel, _totalLikesLabel, _likeButton);
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_mediaImageView]|" options:kNilOptions metrics:nil views:viewDictionary]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_usernameAndCaptionLabel]|" options:kNilOptions metrics:nil views:viewDictionary]];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_usernameAndCaptionLabel][_totalLikesLabel(==80)][_likeButton(==38)]|" options:NSLayoutFormatAlignAllTop | NSLayoutFormatAlignAllBottom metrics:nil views:viewDictionary]];
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_commentLabel]|" options:kNilOptions metrics:nil views:viewDictionary]];
         
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_mediaImageView][_usernameAndCaptionLabel][_commentLabel]"
@@ -180,10 +195,25 @@ static NSParagraphStyle *paragraphStyle;
     }
     
     self.usernameAndCaptionLabel.attributedText = [self usernameAndCaptionString];
+    
     self.commentLabel.attributedText = [self commentString];
+    self.likeButton.likeButtonState = mediaItem.likeState;
+    
+    NSMutableString *likesStringUpdated = [NSMutableString stringWithFormat:@"%li", (long)self.mediaItem.likes];
+    self.totalLikesLabel.text = likesStringUpdated;
 }
 
-#pragma mark - Attributed 
+#pragma mark - Liking
+
+- (void) likePressed:(UIButton *)sender {
+    [self.delegate cellDidPressLikeButton:self];
+    
+    NSMutableString *likesStringUpdated = [NSMutableString stringWithFormat:@"%li", (long)self.mediaItem.likes];
+    self.totalLikesLabel.text = likesStringUpdated;
+}
+
+
+#pragma mark - Attributed
 
 - (NSAttributedString *) usernameAndCaptionString {
     CGFloat usernameFontSize = 15;

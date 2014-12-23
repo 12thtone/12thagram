@@ -77,9 +77,7 @@
                 });
             });
         }
-        
-        NSLog(@"It wrote to disk.");
-    }
+}
     
     return self;
 }
@@ -306,6 +304,60 @@
                                         }
                                     }];
     }
+}
+
+#pragma mark - Liking Media Items
+
+- (void) toggleLikeOnMediaItem:(Media *)mediaItem {
+    NSString *urlString = [NSString stringWithFormat:@"media/%@/likes", mediaItem.idNumber];
+    NSDictionary *parameters = @{@"access_token": self.accessToken};
+    
+    if (mediaItem.likeState == LikeStateNotLiked) {
+        
+        mediaItem.likeState = LikeStateLiking;
+        
+        [self.instagramOperationManager POST:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"PASS");
+            mediaItem.likeState = LikeStateLiked;
+            
+            NSMutableString *tempLikesString = [NSMutableString stringWithFormat:@"%@", mediaItem.totalLikes];
+            mediaItem.likes = [tempLikesString integerValue];
+            mediaItem.likes++;
+            NSLog(@"Liked %li", mediaItem.likes);
+                        
+            [self reloadMediaItem:mediaItem];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            mediaItem.likeState = LikeStateNotLiked;
+            NSLog(@"FAIL 1");
+            [self reloadMediaItem:mediaItem];
+        }];
+        
+    } else if (mediaItem.likeState == LikeStateLiked) {
+
+        mediaItem.likeState = LikeStateUnliking;
+        
+        [self.instagramOperationManager DELETE:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"PASS");
+            mediaItem.likeState = LikeStateNotLiked;
+            
+            NSMutableString *tempLikesString = [NSMutableString stringWithFormat:@"%@", mediaItem.totalLikes];
+            mediaItem.likes = [tempLikesString integerValue];
+            NSLog(@"Unliked %li", mediaItem.likes);
+            
+            [self reloadMediaItem:mediaItem];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            mediaItem.likeState = LikeStateLiked;
+            NSLog(@"FAIL 2");
+            [self reloadMediaItem:mediaItem];
+        }];
+        
+    }
+}
+
+- (void) reloadMediaItem:(Media *)mediaItem {
+    NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"mediaItems"];
+    NSUInteger index = [mutableArrayWithKVO indexOfObject:mediaItem];
+    [mutableArrayWithKVO replaceObjectAtIndex:index withObject:mediaItem];
 }
 
 @end
