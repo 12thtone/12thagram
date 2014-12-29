@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		50BF5809A00723BC3021A55A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD7AD75A60CF63770CBB9E9 /* libPods.a */; };
 		F904C50B1A253A6600819B3E /* MediaTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F904C50A1A253A6600819B3E /* MediaTableViewCell.m */; };
+		F93248271A49A39600451A67 /* ComposeCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = F93248261A49A39600451A67 /* ComposeCommentView.m */; };
 		F977C8AB1A25033400E9E155 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = F977C8AA1A25033400E9E155 /* User.m */; };
 		F977C8AE1A25045100E9E155 /* Media.m in Sources */ = {isa = PBXBuildFile; fileRef = F977C8AD1A25045100E9E155 /* Media.m */; };
 		F977C8B11A25056700E9E155 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = F977C8B01A25056700E9E155 /* Comment.m */; };
@@ -57,6 +58,8 @@
 		AF197665FFD6DC2B31D4C54C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F904C5091A253A6600819B3E /* MediaTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MediaTableViewCell.h; path = ../MediaTableViewCell.h; sourceTree = "<group>"; };
 		F904C50A1A253A6600819B3E /* MediaTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MediaTableViewCell.m; path = ../MediaTableViewCell.m; sourceTree = "<group>"; };
+		F93248251A49A39600451A67 /* ComposeCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComposeCommentView.h; path = ../ComposeCommentView.h; sourceTree = "<group>"; };
+		F93248261A49A39600451A67 /* ComposeCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ComposeCommentView.m; path = ../ComposeCommentView.m; sourceTree = "<group>"; };
 		F977C8A91A25033400E9E155 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = ../User.h; sourceTree = "<group>"; };
 		F977C8AA1A25033400E9E155 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = ../User.m; sourceTree = "<group>"; };
 		F977C8AC1A25045100E9E155 /* Media.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Media.h; path = ../Media.h; sourceTree = "<group>"; };
@@ -168,6 +171,8 @@
 				F9A4D2F31A23EEBE003456C0 /* Images */,
 				F9A4D2D11A23EB9A003456C0 /* AppDelegate.h */,
 				F9A4D2D21A23EB9A003456C0 /* AppDelegate.m */,
+				F93248251A49A39600451A67 /* ComposeCommentView.h */,
+				F93248261A49A39600451A67 /* ComposeCommentView.m */,
 				F9D2B1A61A3E49EA00D4526E /* LikeButton.h */,
 				F9D2B1A71A3E49EA00D4526E /* LikeButton.m */,
 				F9D2B1A31A3E461200D4526E /* CircleSpinnerView.h */,
@@ -297,6 +302,7 @@
 				TargetAttributes = {
 					F9A4D2C91A23EB9A003456C0 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 84HESCG3TT;
 					};
 					F9A4D2E21A23EB9A003456C0 = {
 						CreatedOnToolsVersion = 6.1;
@@ -407,6 +413,7 @@
 				F977C8B41A25066300E9E155 /* DataSource.m in Sources */,
 				F9A4D2D31A23EB9A003456C0 /* AppDelegate.m in Sources */,
 				F9D2B1A81A3E49EA00D4526E /* LikeButton.m in Sources */,
+				F93248271A49A39600451A67 /* ComposeCommentView.m in Sources */,
 				F9D2B1A51A3E461200D4526E /* CircleSpinnerView.m in Sources */,
 				F9A4D2D01A23EB9A003456C0 /* main.m in Sources */,
 			);
@@ -514,6 +521,7 @@
 			baseConfigurationReference = FF4EEC74576715A286ECDC11 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Blocstagram/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -525,6 +533,7 @@
 			baseConfigurationReference = AF197665FFD6DC2B31D4C54C /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Blocstagram/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

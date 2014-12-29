@@ -19,6 +19,10 @@
 
 @property (nonatomic, weak) UIImageView *lastTappedImageView;
 @property(nonatomic, readonly, getter=isDragging) BOOL dragging;
+@property (nonatomic, weak) UIView *lastSelectedCommentView;
+@property (nonatomic, assign) CGFloat lastKeyboardAdjustment;
+
+@property (nonatomic, assign) BOOL rotatingAnimated;
 
 @end
 
@@ -33,11 +37,30 @@
     [self.refreshControl addTarget:self action:@selector(refreshControlDidFire:) forControlEvents:UIControlEventValueChanged];
     
     [self.tableView registerClass:[MediaTableViewCell class] forCellReuseIdentifier:@"mediaCell"];
+    
+    self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
+    /*
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(orientationChanged:)
+                                                 name:UIDeviceOrientationDidChangeNotification
+                                               object:nil];*/
 }
 
 - (void) dealloc
 {
     [[DataSource sharedInstance] removeObserver:self forKeyPath:@"mediaItems"];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    //[[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,6 +76,28 @@
         
     }
     return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
+    if (indexPath) {
+        [self.tableView deselectRowAtIndexPath:indexPath animated:animated];
+    }
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self selector:@selector(keyboardWillShow:)
+     name:UIKeyboardWillShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self selector:@selector(keyboardWillHide:)
+     name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void) viewWillDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter]
+     removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter]
+     removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 #pragma mark - Load More
@@ -74,6 +119,14 @@
 
 - (void) cellDidPressLikeButton:(MediaTableViewCell *)cell {
     [[DataSource sharedInstance] toggleLikeOnMediaItem:cell.mediaItem];
+}
+
+- (void) cellWillStartComposingComment:(MediaTableViewCell *)cell {
+    self.lastSelectedCommentView = (UIView *)cell.commentView;
+}
+
+- (void) cell:(MediaTableViewCell *)cell didComposeComment:(NSString *)comment {
+    [[DataSource sharedInstance] commentOnMediaItem:cell.mediaItem withCommentText:comment];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -115,9 +168,9 @@
     Media *item = [DataSource sharedInstance].mediaItems[indexPath.row];
     
     if (item.image) {
-        return 350;
+        return 450;
     } else {
-        return 150;
+        return 250;
     }
 }
 
@@ -131,6 +184,11 @@
             }
         //});
     }
+}
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    MediaTableViewCell *cell = (MediaTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    [cell stopComposingComment];
 }
 /*
 - (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -282,5 +340,163 @@
  return animator;
  }
 
+#pragma mark - Keyboard Handling
+/*
+- (void)orientationChanged:(NSNotification *)notification
+{
+    NSLog(@"Rotating");
+    
+    //[self keyboardWillShow:nil];
+    //[self keyboardWillHide:nil];
+    //[self cellWillStartComposingComment:nil];
+    
+    //[MediaTableViewCell stopComposingComment];
+    
+    
+    
+    // Figure out a way to restart the comment composing process when the orientation changes. 
+}
+*/
+
+// TRY scrollRectToVisible!!!!!!!!!!!!!!
+/*
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    // Get the frame of the keyboard within self.view's coordinate system
+    NSValue *frameValue = notification.userInfo[UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardFrameInScreenCoordinates = frameValue.CGRectValue;
+    CGRect keyboardFrameInViewCoordinates = [self.navigationController.view convertRect:keyboardFrameInScreenCoordinates fromView:self.view.window];
+    
+    // Get the frame of the comment view in the same coordinate system
+    CGRect commentViewFrameInViewCoordinates = [self.navigationController.view convertRect:self.lastSelectedCommentView.bounds fromView:self.lastSelectedCommentView];
+    
+    CGPoint contentOffset = self.tableView.contentOffset;
+    UIEdgeInsets contentInsets = self.tableView.contentInset;
+    UIEdgeInsets scrollIndicatorInsets = self.tableView.scrollIndicatorInsets;
+    CGFloat heightToScroll = 0;
+    
+    CGFloat keyboardY = CGRectGetMinY(keyboardFrameInViewCoordinates);
+    CGFloat commentViewY = CGRectGetMinY(commentViewFrameInViewCoordinates);
+    CGFloat difference = commentViewY - keyboardY;
+    
+    if (difference > 0) {
+        heightToScroll += difference;
+    }
+    
+    if (CGRectIntersectsRect(keyboardFrameInViewCoordinates, commentViewFrameInViewCoordinates)) {
+        // The two frames intersect (the keyboard would block the view)
+        CGRect intersectionRect = CGRectIntersection(keyboardFrameInViewCoordinates, commentViewFrameInViewCoordinates);
+        heightToScroll += CGRectGetHeight(intersectionRect);
+    }
+    
+    if (heightToScroll > 0) {
+        contentInsets.bottom += heightToScroll;
+        scrollIndicatorInsets.bottom += heightToScroll;
+        contentOffset.y += heightToScroll;
+        
+        NSNumber *durationNumber = notification.userInfo[UIKeyboardAnimationDurationUserInfoKey];
+        NSNumber *curveNumber = notification.userInfo[UIKeyboardAnimationCurveUserInfoKey];
+        
+        NSTimeInterval duration = durationNumber.doubleValue;
+        UIViewAnimationCurve curve = curveNumber.unsignedIntegerValue;
+        UIViewAnimationOptions options = curve << 16;
+        
+        [UIView animateWithDuration:duration delay:0 options:options animations:^{
+            self.tableView.contentInset = contentInsets;
+            self.tableView.scrollIndicatorInsets = scrollIndicatorInsets;
+            self.tableView.contentOffset = contentOffset;
+        } completion:nil];
+    }
+    
+    self.lastKeyboardAdjustment = heightToScroll;
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    UIEdgeInsets contentInsets = self.tableView.contentInset;
+    contentInsets.bottom -= self.lastKeyboardAdjustment;
+    
+    UIEdgeInsets scrollIndicatorInsets = self.tableView.scrollIndicatorInsets;
+    scrollIndicatorInsets.bottom -= self.lastKeyboardAdjustment;
+    
+    NSNumber *durationNumber = notification.userInfo[UIKeyboardAnimationDurationUserInfoKey];
+    NSNumber *curveNumber = notification.userInfo[UIKeyboardAnimationCurveUserInfoKey];
+    
+    NSTimeInterval duration = durationNumber.doubleValue;
+    UIViewAnimationCurve curve = curveNumber.unsignedIntegerValue;
+    UIViewAnimationOptions options = curve << 16;
+    
+    [UIView animateWithDuration:duration delay:0 options:options animations:^{
+        self.tableView.contentInset = contentInsets;
+        self.tableView.scrollIndicatorInsets = scrollIndicatorInsets;
+    } completion:nil];
+}*/
+
+// #1
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    self.rotatingAnimated = YES;
+}
+// #3
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+}
+// #5
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    self.rotatingAnimated = NO;
+}
+// #4
+- (void)keyboardWillShow:(NSNotification*)notification {
+    [self adjustViewForKeyboardNotification:notification];
+}
+// #2
+- (void)keyboardWillHide:(NSNotification*)notification {
+    [self adjustViewForKeyboardNotification:notification];
+}
+
+- (void)adjustViewForKeyboardNotification:(NSNotification *)notification {
+    NSDictionary *notificationInfo = [notification userInfo];
+    
+    // Get the end frame of the keyboard in screen coordinates.
+    CGRect finalKeyboardFrame = [[notificationInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    // Convert the finalKeyboardFrame to view coordinates to take into account any rotation
+    // factors applied to the window’s contents as a result of interface orientation changes.
+    finalKeyboardFrame = [self.view convertRect:finalKeyboardFrame fromView:self.view.window];
+    
+    // Calculate new position of the commentBar
+    CGRect commentBarFrame = self.lastSelectedCommentView.frame;
+    commentBarFrame.origin.y = finalKeyboardFrame.origin.y - commentBarFrame.size.height;
+    
+    // Update tableView height.
+    //CGRect tableViewFrame = self.tableView.frame;
+    CGRect tableViewFrame = self.tableView.frame;
+    tableViewFrame.size.height = commentBarFrame.origin.y;
+    
+    if (!self.rotatingAnimated) {
+        // Get the animation curve and duration
+        UIViewAnimationCurve animationCurve = (UIViewAnimationCurve) [[notificationInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
+        NSTimeInterval animationDuration = [[notificationInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+        
+        // Animate view size synchronously with the appearance of the keyboard.
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:animationDuration];
+        [UIView setAnimationCurve:animationCurve];
+        [UIView setAnimationBeginsFromCurrentState:YES];
+        
+        self.lastSelectedCommentView.frame = commentBarFrame;
+        self.tableView.frame = tableViewFrame;
+        
+        [UIView commitAnimations];
+    } else {
+        self.lastSelectedCommentView.frame = commentBarFrame;
+        self.tableView.frame = tableViewFrame;
+    }
+}
+
+// Study the behavior on the device. It seems to work sometimes, but there is a strange white box that appears with the
+// keyboard. The commentView might not be always set to lastSelectedCommentView. It might be creating one with matching
+// dimensions. Look for strange behavior.
 
 @end

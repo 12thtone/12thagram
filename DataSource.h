@@ -27,4 +27,6 @@ typedef void (^NewItemCompletionBlock)(NSError *error);
 
 - (void) toggleLikeOnMediaItem:(Media *)mediaItem;
 
+- (void) commentOnMediaItem:(Media *)mediaItem withCommentText:(NSString *)commentText;
+
 @end
