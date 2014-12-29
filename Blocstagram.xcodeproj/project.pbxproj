@@ -30,6 +30,9 @@
 		F9A4D3061A23EEF5003456C0 /* 9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F9A4D2FC1A23EEF5003456C0 /* 9.jpg */; };
 		F9A4D3071A23EEF5003456C0 /* 10.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F9A4D2FD1A23EEF5003456C0 /* 10.jpg */; };
 		F9A4D30A1A23EF81003456C0 /* ImagesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A4D3091A23EF81003456C0 /* ImagesTableViewController.m */; };
+		F9C1DFE41A51CBC8005A8FE7 /* CameraToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C1DFE31A51CBC8005A8FE7 /* CameraToolbar.m */; };
+		F9C1DFE71A51CD35005A8FE7 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C1DFE61A51CD35005A8FE7 /* CameraViewController.m */; };
+		F9C1DFEA1A51D2F8005A8FE7 /* UIImage+ImageUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C1DFE91A51D2F8005A8FE7 /* UIImage+ImageUtilities.m */; };
 		F9CCC3001A3E14400045E6F7 /* placeholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F9CCC2FF1A3E14400045E6F7 /* placeholder.jpg */; };
 		F9D2B19D1A3E445F00D4526E /* angle-mask.png in Resources */ = {isa = PBXBuildFile; fileRef = F9D2B1971A3E445F00D4526E /* angle-mask.png */; };
 		F9D2B19E1A3E445F00D4526E /* angle-mask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F9D2B1981A3E445F00D4526E /* angle-mask@2x.png */; };
@@ -91,6 +94,12 @@
 		F9A4D2FD1A23EEF5003456C0 /* 10.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 10.jpg; sourceTree = "<group>"; };
 		F9A4D3081A23EF81003456C0 /* ImagesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagesTableViewController.h; sourceTree = "<group>"; };
 		F9A4D3091A23EF81003456C0 /* ImagesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagesTableViewController.m; sourceTree = "<group>"; };
+		F9C1DFE21A51CBC8005A8FE7 /* CameraToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CameraToolbar.h; path = ../CameraToolbar.h; sourceTree = "<group>"; };
+		F9C1DFE31A51CBC8005A8FE7 /* CameraToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CameraToolbar.m; path = ../CameraToolbar.m; sourceTree = "<group>"; };
+		F9C1DFE51A51CD35005A8FE7 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CameraViewController.h; path = ../CameraViewController.h; sourceTree = "<group>"; };
+		F9C1DFE61A51CD35005A8FE7 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CameraViewController.m; path = ../CameraViewController.m; sourceTree = "<group>"; };
+		F9C1DFE81A51D2F8005A8FE7 /* UIImage+ImageUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageUtilities.h"; sourceTree = "<group>"; };
+		F9C1DFE91A51D2F8005A8FE7 /* UIImage+ImageUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageUtilities.m"; sourceTree = "<group>"; };
 		F9CCC2FF1A3E14400045E6F7 /* placeholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = placeholder.jpg; sourceTree = "<group>"; };
 		F9D2B1971A3E445F00D4526E /* angle-mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "angle-mask.png"; sourceTree = "<group>"; };
 		F9D2B1981A3E445F00D4526E /* angle-mask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "angle-mask@2x.png"; sourceTree = "<group>"; };
@@ -171,6 +180,12 @@
 				F9A4D2F31A23EEBE003456C0 /* Images */,
 				F9A4D2D11A23EB9A003456C0 /* AppDelegate.h */,
 				F9A4D2D21A23EB9A003456C0 /* AppDelegate.m */,
+				F9C1DFE81A51D2F8005A8FE7 /* UIImage+ImageUtilities.h */,
+				F9C1DFE91A51D2F8005A8FE7 /* UIImage+ImageUtilities.m */,
+				F9C1DFE51A51CD35005A8FE7 /* CameraViewController.h */,
+				F9C1DFE61A51CD35005A8FE7 /* CameraViewController.m */,
+				F9C1DFE21A51CBC8005A8FE7 /* CameraToolbar.h */,
+				F9C1DFE31A51CBC8005A8FE7 /* CameraToolbar.m */,
 				F93248251A49A39600451A67 /* ComposeCommentView.h */,
 				F93248261A49A39600451A67 /* ComposeCommentView.m */,
 				F9D2B1A61A3E49EA00D4526E /* LikeButton.h */,
@@ -411,8 +426,11 @@
 				F9A4D30A1A23EF81003456C0 /* ImagesTableViewController.m in Sources */,
 				F98E9E881A30B753009381E2 /* LoginViewController.m in Sources */,
 				F977C8B41A25066300E9E155 /* DataSource.m in Sources */,
+				F9C1DFE71A51CD35005A8FE7 /* CameraViewController.m in Sources */,
+				F9C1DFE41A51CBC8005A8FE7 /* CameraToolbar.m in Sources */,
 				F9A4D2D31A23EB9A003456C0 /* AppDelegate.m in Sources */,
 				F9D2B1A81A3E49EA00D4526E /* LikeButton.m in Sources */,
+				F9C1DFEA1A51D2F8005A8FE7 /* UIImage+ImageUtilities.m in Sources */,
 				F93248271A49A39600451A67 /* ComposeCommentView.m in Sources */,
 				F9D2B1A51A3E461200D4526E /* CircleSpinnerView.m in Sources */,
 				F9A4D2D01A23EB9A003456C0 /* main.m in Sources */,
