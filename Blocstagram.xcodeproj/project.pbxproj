@@ -10,6 +10,11 @@
 		50BF5809A00723BC3021A55A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD7AD75A60CF63770CBB9E9 /* libPods.a */; };
 		F904C50B1A253A6600819B3E /* MediaTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F904C50A1A253A6600819B3E /* MediaTableViewCell.m */; };
 		F93248271A49A39600451A67 /* ComposeCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = F93248261A49A39600451A67 /* ComposeCommentView.m */; };
+		F942A2491A546C8E006064E5 /* UserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F942A2481A546C8E006064E5 /* UserTests.m */; };
+		F942A24B1A546D87006064E5 /* CommentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F942A24A1A546D87006064E5 /* CommentTests.m */; };
+		F942A24D1A546E7A006064E5 /* MediaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F942A24C1A546E7A006064E5 /* MediaTests.m */; };
+		F942A2531A547589006064E5 /* ComposeCommentViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F942A2521A547589006064E5 /* ComposeCommentViewTests.m */; };
+		F942A2551A547C79006064E5 /* mediaItemHeightTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F942A2541A547C79006064E5 /* mediaItemHeightTests.m */; };
 		F977C8AB1A25033400E9E155 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = F977C8AA1A25033400E9E155 /* User.m */; };
 		F977C8AE1A25045100E9E155 /* Media.m in Sources */ = {isa = PBXBuildFile; fileRef = F977C8AD1A25045100E9E155 /* Media.m */; };
 		F977C8B11A25056700E9E155 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = F977C8B01A25056700E9E155 /* Comment.m */; };
@@ -68,6 +73,11 @@
 		F904C50A1A253A6600819B3E /* MediaTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MediaTableViewCell.m; path = ../MediaTableViewCell.m; sourceTree = "<group>"; };
 		F93248251A49A39600451A67 /* ComposeCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComposeCommentView.h; path = ../ComposeCommentView.h; sourceTree = "<group>"; };
 		F93248261A49A39600451A67 /* ComposeCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ComposeCommentView.m; path = ../ComposeCommentView.m; sourceTree = "<group>"; };
+		F942A2481A546C8E006064E5 /* UserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTests.m; sourceTree = "<group>"; };
+		F942A24A1A546D87006064E5 /* CommentTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentTests.m; sourceTree = "<group>"; };
+		F942A24C1A546E7A006064E5 /* MediaTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaTests.m; sourceTree = "<group>"; };
+		F942A2521A547589006064E5 /* ComposeCommentViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeCommentViewTests.m; sourceTree = "<group>"; };
+		F942A2541A547C79006064E5 /* mediaItemHeightTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mediaItemHeightTests.m; sourceTree = "<group>"; };
 		F977C8A91A25033400E9E155 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = ../User.h; sourceTree = "<group>"; };
 		F977C8AA1A25033400E9E155 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = ../User.m; sourceTree = "<group>"; };
 		F977C8AC1A25045100E9E155 /* Media.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Media.h; path = ../Media.h; sourceTree = "<group>"; };
@@ -256,6 +266,11 @@
 			children = (
 				F9A4D2E91A23EB9A003456C0 /* BlocstagramTests.m */,
 				F9A4D2E71A23EB9A003456C0 /* Supporting Files */,
+				F942A2481A546C8E006064E5 /* UserTests.m */,
+				F942A24A1A546D87006064E5 /* CommentTests.m */,
+				F942A24C1A546E7A006064E5 /* MediaTests.m */,
+				F942A2521A547589006064E5 /* ComposeCommentViewTests.m */,
+				F942A2541A547C79006064E5 /* mediaItemHeightTests.m */,
 			);
 			path = BlocstagramTests;
 			sourceTree = "<group>";
@@ -473,7 +488,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F942A2551A547C79006064E5 /* mediaItemHeightTests.m in Sources */,
+				F942A2491A546C8E006064E5 /* UserTests.m in Sources */,
+				F942A24B1A546D87006064E5 /* CommentTests.m in Sources */,
+				F942A24D1A546E7A006064E5 /* MediaTests.m in Sources */,
 				F9A4D2EA1A23EB9A003456C0 /* BlocstagramTests.m in Sources */,
+				F942A2531A547589006064E5 /* ComposeCommentViewTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
