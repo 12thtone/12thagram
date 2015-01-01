@@ -144,8 +144,9 @@
     UIImage *image;
     
     image = [image imageWithFixedOrientation];
-    image = [self imageResizedToMatchAspectRatioOfSize:size];
-    image = [self imageCroppedToRect:rect];
+    image = [image imageResizedToMatchAspectRatioOfSize:size];
+    image = [image imageCroppedToRect:rect];
+    
     
     return image;
 }

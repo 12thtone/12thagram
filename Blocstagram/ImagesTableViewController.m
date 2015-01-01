@@ -5,6 +5,7 @@
 //  Created by Matt Maher on 11/24/14.
 //  Copyright (c) 2014 Matt Maher. All rights reserved.
 //
+// **Pull Request Test
 
 #import "ImagesTableViewController.h"
 #import "DataSource.h"
@@ -97,6 +98,8 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
     if (indexPath) {
         [self.tableView deselectRowAtIndexPath:indexPath animated:animated];
@@ -112,6 +115,8 @@
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
     [[NSNotificationCenter defaultCenter]
      removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter]
