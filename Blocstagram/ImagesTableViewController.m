@@ -5,7 +5,7 @@
 //  Created by Matt Maher on 11/24/14.
 //  Copyright (c) 2014 Matt Maher. All rights reserved.
 //
-// **Pull Request Test
+// **Pull Request
 
 #import "ImagesTableViewController.h"
 #import "DataSource.h"
