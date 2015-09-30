@@ -1,5 +1,5 @@
-# Blocstagram
-Blocstagram is an Instagram client app for iOS. It allows users to login to their Instagram account and view their feed by pulling data from the Instagram API. 
+# 12thagram
+12thagram is an Instagram client app for iOS. It allows users to login to their Instagram account and view their feed by pulling data from the Instagram API. 
 
 Some prominent features:
 * Delete images
